@@ -9,9 +9,9 @@ terraform {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
     }
-    bucket = "kuber-2026-05-project-s3-tfstate"
-    region = "ru-central1"
-    key    = "k8s-deploy_terraform.tfstate"
+    bucket                      = "kuber-2026-05-project-s3-tfstate"
+    region                      = "ru-central1"
+    key                         = "k8s-deploy_terraform.tfstate"
     skip_region_validation      = true
     skip_credentials_validation = true
     skip_metadata_api_check     = true
@@ -20,6 +20,6 @@ terraform {
 }
 
 provider "yandex" {
-  folder_id                = var.yc_folder_id
-  zone                     = var.yc_default_zone
+  folder_id = var.yc_folder_id
+  zone      = var.yc_default_zone
 }
