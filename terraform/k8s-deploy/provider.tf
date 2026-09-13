@@ -5,7 +5,6 @@ terraform {
       version = "0.226.0"
     }
   }
-  required_version = "1.13.1"
   backend "s3" {
     endpoints = {
       s3 = "https://storage.yandexcloud.net"
