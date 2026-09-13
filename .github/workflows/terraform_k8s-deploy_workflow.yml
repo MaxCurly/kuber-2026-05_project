@@ -2,10 +2,11 @@ name: 'terraform_k8s-deploy_workflow'
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    types: [closed]
     branches: [ "main" ]
     paths:
-      - 'terraform/k8s-deploy/'
+      - 'terraform/k8s-deploy/**'
 
 permissions:
   contents: read
