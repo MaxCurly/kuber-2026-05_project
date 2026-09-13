@@ -210,12 +210,12 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
 }
 
 resource "yandex_kubernetes_marketplace_helm_release" "gwin" {
-  cluster_id = yandex_kubernetes_cluster.k8s_cluster.id
-  name       = "gwin"
-  namespace  = "gwin-system"
+  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
+  name            = "gwin"
+  namespace       = "gwin-system"
   product_version = "f2e04077v04sobds7gkt"
   user_values = {
-    "controller.folderId" = var.yc_folder_id
+    "controller.folderId"                                                     = var.yc_folder_id
     "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.otus-kuber-2026-05-admin-sa.id
     "controller.defaultBalancerSubnets" = yamlencode([
       yandex_vpc_subnet.subnet_1.id,
