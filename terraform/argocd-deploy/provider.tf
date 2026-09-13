@@ -46,6 +46,8 @@ provider "helm" {
   }
 }
 
-data "yandex_kubernetes_cluster" "k8s-cluster" {}
+data "yandex_kubernetes_cluster" "k8s-cluster" {
+  name = var.yc_k8s_cluster_name
+}
 
 data "yandex_client_config" "client" {}
