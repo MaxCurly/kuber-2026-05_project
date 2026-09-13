@@ -1,6 +1,7 @@
 name: 'terraform_k8s-deploy_workflow'
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
     paths:
