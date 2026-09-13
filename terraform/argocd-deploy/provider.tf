@@ -12,6 +12,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "3.3.0"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.19.0"
+    }
   }
   backend "s3" {
     endpoints = {
@@ -46,6 +50,15 @@ provider "helm" {
   }
 }
 
-data "yandex_kubernetes_cluster" "k8s-cluster" {}
+provider "kubectl" {
+  host                   = data.yandex_kubernetes_cluster.k8s-cluster.master[0].external_v4_endpoint
+  cluster_ca_certificate = data.yandex_kubernetes_cluster.k8s-cluster.master[0].cluster_ca_certificate
+  token                  = data.yandex_client_config.client.iam_token
+  load_config_file       = false
+}
+
+data "yandex_kubernetes_cluster" "k8s-cluster" {
+  name = var.yc_k8s_cluster_name
+}
 
 data "yandex_client_config" "client" {}
