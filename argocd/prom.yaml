@@ -5,8 +5,6 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"    # ← создаётся после CRD
 spec:
   project: default
   source:
@@ -19,7 +17,7 @@ spec:
         # Ваши кастомные значения
         grafana:
           enabled: true
-          adminPassword: "admin"   # ← в продакшене используйте Secret
+          adminPassword: "admin"
           ingress:
             enabled: false
         prometheus:
@@ -31,9 +29,6 @@ spec:
                 cpu: "500m"
         alertmanager:
           enabled: true
-        # Отключаем повторную установку CRD (уже сделано в первом Application)
-        crds:
-          enabled: false
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring
