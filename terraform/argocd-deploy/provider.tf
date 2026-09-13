@@ -39,15 +39,13 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  kubernetes {
+  kubernetes = {
     host                   = data.yandex_kubernetes_cluster.k8s-cluster.master[0].external_v4_endpoint
     cluster_ca_certificate = data.yandex_kubernetes_cluster.k8s-cluster.master[0].cluster_ca_certificate
     token                  = data.yandex_client_config.client.iam_token
   }
 }
 
-data "yandex_kubernetes_cluster" "k8s-cluster" {
-  name = var.cluster_name
-}
+data "yandex_kubernetes_cluster" "k8s-cluster" {}
 
 data "yandex_client_config" "client" {}
