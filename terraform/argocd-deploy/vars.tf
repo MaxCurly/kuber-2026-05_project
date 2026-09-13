@@ -9,6 +9,6 @@ variable "yc_default_zone" {
 }
 
 variable "yc_k8s_cluster_name" {
-  type        = string
-  default     = null
+  type    = string
+  default = null
 }
