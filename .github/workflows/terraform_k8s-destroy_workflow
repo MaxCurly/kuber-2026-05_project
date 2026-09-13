@@ -1,4 +1,4 @@
-name: 'terraform_k8s-deploy_workflow'
+name: 'terraform_k8s-destroy_workflow'
 
 on:
   workflow_dispatch:
