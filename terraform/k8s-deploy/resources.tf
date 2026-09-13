@@ -104,17 +104,17 @@ resource "yandex_kubernetes_cluster" "k8s_cluster" {
   ]
 
   cluster_ipv4_range = var.yc_k8s_cluster_ipv4_range
-  description = var.yc_k8s_cluster_name
-  folder_id   = var.yc_folder_id
+  description        = var.yc_k8s_cluster_name
+  folder_id          = var.yc_folder_id
   kms_provider {
     key_id = yandex_kms_symmetric_key.kms_key.id
   }
   master {
-    version           = var.yc_k8s_cluster_master_version
-    public_ip         = var.yc_k8s_cluster_master_public_ip
+    version   = var.yc_k8s_cluster_master_version
+    public_ip = var.yc_k8s_cluster_master_public_ip
     zonal {
       zone      = var.yc_k8s_cluster_master_zone ### Переделать
-      subnet_id = yandex_vpc_subnet.subnet_1.id ### Переделать
+      subnet_id = yandex_vpc_subnet.subnet_1.id  ### Переделать
     }
     master_logging {
       enabled                    = var.yc_k8s_cluster_master_logging_enabled
