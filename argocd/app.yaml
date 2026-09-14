@@ -1,64 +1,17 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
-  name: example-deployment
-  namespace: default
-  labels:
-    app: example-app
+  name: argo-httproute
+  namespace: argocd
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: example-app
-  template:
-    metadata:
-      labels:
-        app: example-app
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/nginx/conf.d
-      volumes:
-      - name: config-volume
-        configMap:
-          name: example-html
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: example-html
-  namespace: default
-data:
-  default.conf: |
-    server {
-        listen 80;
-        server_name _;
-        
-        location / {
-            return 200 'Hello World';
-            add_header Content-Type text/plain;
-        }
-    }
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: example-service
-  namespace: default
-  labels:
-    app: example-app
-spec:
-  type: NodePort
-  ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30080
-    protocol: TCP
-    name: http
-  selector:
-    app: example-app
+  parentRefs:
+    - name: argo-gateway
+      sectionName: http-8080
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: argocd-server
+          port: 80
