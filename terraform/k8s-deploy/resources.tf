@@ -17,6 +17,13 @@ resource "yandex_iam_service_account" "sa_node" {
   folder_id   = var.yc_folder_id
 }
 
+resource "yandex_iam_service_account" "sa_gwin" {
+  name        = var.yc_sa_gwin_name
+  description = var.yc_sa_gwin_name
+  folder_id   = var.yc_folder_id
+}
+
+
 resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
   for_each = toset([
     "load-balancer.admin",
@@ -27,6 +34,22 @@ resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
   folder_id = var.yc_folder_id
   role      = each.key
   member    = "serviceAccount:${yandex_iam_service_account.sa_cluster.id}"
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
+  for_each = toset([
+    "alb.editor",
+    "vpc.publicAdmin",
+    "certificate-manager.certificates.downloader",
+    "certificate-manager.editor",
+    "compute.viewer",
+    "k8s.viewer",
+    "smart-web-security.editor",
+    "logging.writer"
+  ])
+  folder_id = var.yc_folder_id
+  role      = each.key
+  member    = "serviceAccount:${yandex_iam_service_account.sa_gwin.id}"
 }
 
 resource "yandex_resourcemanager_folder_iam_member" "sa_node_role" {
@@ -209,7 +232,6 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
   }
 }
 
-
 resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
   cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
   product_version = "f2e04077v04sobds7gkt"
@@ -217,7 +239,7 @@ resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
   namespace       = "gwin-system"
   user_values = {
     "controller.folderId"                                                     = var.yc_folder_id
-    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_cluster.id
+    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
     "controller.defaultBalancerSubnets" = yamlencode([
       yandex_vpc_subnet.subnet_1.id,
       yandex_vpc_subnet.subnet_2.id,
