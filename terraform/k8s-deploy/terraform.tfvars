@@ -3,6 +3,7 @@ yc_logging_group_name                                                = "k8s-logg
 yc_logging_group_retention_period                                    = "604800s"
 yc_sa_cluster_name                                                   = "k8s-sa-cluster"
 yc_sa_node_name                                                      = "k8s-sa-node"
+yc_sa_gwin_name                                                      = "k8s-gwin-node"
 yc_net_name                                                          = "kuber_2026_05_project_net"
 yc_subnet_1_name                                                     = "kuber_2026_05_project_subnet_ru-central1-a"
 yc_subnet_1_v4_cidr_block                                            = "10.101.0.0/24"
