@@ -28,6 +28,11 @@ variable "yc_sa_node_name" {
   default = null
 }
 
+variable "yc_sa_gwin_name" {
+  type    = string
+  default = null
+}
+
 variable "yc_net_name" {
   type    = string
   default = null
