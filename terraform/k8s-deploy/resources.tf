@@ -236,7 +236,7 @@ resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
   cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
   product_version = "f2e04077v04sobds7gkt"
   name            = "gwin"
-  namespace       = "gwin-system"
+  namespace       = "yandex-system"
   user_values = {
     "controller.folderId"                                                     = var.yc_folder_id
     "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
