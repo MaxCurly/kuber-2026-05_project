@@ -233,6 +233,24 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
   }
 }
 
+resource "yandex_iam_workload_identity_oidc_federation" "wlif" {
+  name      = "gwin-federation"
+  folder_id = var.yc_folder_id
+  issuer    = yandex_kubernetes_cluster.k8s-cluster.workload_identity_federation[0].issuer
+  audiences = [yandex_kubernetes_cluster.k8s-cluster.workload_identity_federation[0].issuer]
+  jwks_url  = yandex_kubernetes_cluster.k8s-cluster.workload_identity_federation[0].jwks_uri
+
+  depends_on = [yandex_kubernetes_cluster.k8s-cluster]
+}
+
+resource "yandex_iam_workload_identity_federated_credential" "gwin_cred" {
+  service_account_id  = yandex_iam_service_account.sa_gwin.id
+  federation_id       = yandex_iam_workload_identity_oidc_federation.wlif.id
+  external_subject_id = "system:serviceaccount:yandex-system:gwin"
+
+  depends_on = [yandex_iam_workload_identity_oidc_federation.wlif]
+}
+
 resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
   cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
   product_version = "f2e04077v04sobds7gkt"
