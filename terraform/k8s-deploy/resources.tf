@@ -17,11 +17,11 @@ resource "yandex_iam_service_account" "sa_node" {
   folder_id   = var.yc_folder_id
 }
 
-resource "yandex_iam_service_account" "sa_gwin" {
-  name        = var.yc_sa_gwin_name
-  description = var.yc_sa_gwin_name
-  folder_id   = var.yc_folder_id
-}
+#resource "yandex_iam_service_account" "sa_gwin" {
+#  name        = var.yc_sa_gwin_name
+#  description = var.yc_sa_gwin_name
+#  folder_id   = var.yc_folder_id
+#}
 
 
 resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
@@ -36,21 +36,21 @@ resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
   member    = "serviceAccount:${yandex_iam_service_account.sa_cluster.id}"
 }
 
-resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
-  for_each = toset([
-    "alb.editor",
-    "vpc.publicAdmin",
-    "certificate-manager.certificates.downloader",
-    "certificate-manager.editor",
-    "compute.viewer",
-    "k8s.viewer",
-    "smart-web-security.editor",
-    "logging.writer"
-  ])
-  folder_id = var.yc_folder_id
-  role      = each.key
-  member    = "serviceAccount:${yandex_iam_service_account.sa_gwin.id}"
-}
+#resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
+#  for_each = toset([
+#    "alb.editor",
+#    "vpc.publicAdmin",
+#    "certificate-manager.certificates.downloader",
+#    "certificate-manager.editor",
+#    "compute.viewer",
+#    "k8s.viewer",
+#    "smart-web-security.editor",
+#    "logging.writer"
+#  ])
+#  folder_id = var.yc_folder_id
+#  role      = each.key
+#  member    = "serviceAccount:${yandex_iam_service_account.sa_gwin.id}"
+#}
 
 resource "yandex_resourcemanager_folder_iam_member" "sa_node_role" {
   for_each = toset([
@@ -250,18 +250,18 @@ resource "yandex_iam_workload_identity_federated_credential" "gwin_cred" {
   depends_on = [yandex_iam_workload_identity_oidc_federation.wlif]
 }
 
-resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
-  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
-  product_version = "f2e04077v04sobds7gkt"
-  name            = "gwin"
-  namespace       = "yandex-system"
-  user_values = {
-    "controller.folderId"                                                     = var.yc_folder_id
-    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
-    "controller.defaultBalancerSubnets" = yamlencode([
-      yandex_vpc_subnet.subnet_2.id,
-      yandex_vpc_subnet.subnet_3.id,
-      yandex_vpc_subnet.subnet_4.id
-    ])
-  }
-}
+#resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
+#  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
+#  product_version = "f2es4v8v1cguell5ooll"
+#  name            = "gwin"
+#  namespace       = "yandex-system"
+#  user_values = {
+#    "controller.folderId"                                                     = var.yc_folder_id
+#    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
+#    "controller.defaultBalancerSubnets" = yamlencode([
+#      yandex_vpc_subnet.subnet_2.id,
+#      yandex_vpc_subnet.subnet_3.id,
+#      yandex_vpc_subnet.subnet_4.id
+#    ])
+#  }
+#}
