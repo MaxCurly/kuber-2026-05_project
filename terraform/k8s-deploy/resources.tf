@@ -250,18 +250,18 @@ resource "yandex_iam_workload_identity_federated_credential" "gwin_cred" {
   depends_on = [yandex_iam_workload_identity_oidc_federation.wlif]
 }
 
-resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
-  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
-  product_version = "f2e04077v04sobds7gkt"
-  name            = "gwin"
-  namespace       = "yandex-system"
-  user_values = {
-    "controller.folderId"                                                     = var.yc_folder_id
-    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
-    "controller.defaultBalancerSubnets" = yamlencode([
-      yandex_vpc_subnet.subnet_2.id,
-      yandex_vpc_subnet.subnet_3.id,
-      yandex_vpc_subnet.subnet_4.id
-    ])
-  }
-}
+#resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
+#  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
+#  product_version = "f2es4v8v1cguell5ooll"
+#  name            = "gwin"
+#  namespace       = "yandex-system"
+#  user_values = {
+#    "controller.folderId"                                                     = var.yc_folder_id
+#    "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
+#    "controller.defaultBalancerSubnets" = yamlencode([
+#      yandex_vpc_subnet.subnet_2.id,
+#      yandex_vpc_subnet.subnet_3.id,
+#      yandex_vpc_subnet.subnet_4.id
+#    ])
+#  }
+#}
