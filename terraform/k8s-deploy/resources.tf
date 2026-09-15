@@ -259,8 +259,9 @@ resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
     "controller.folderId"                                                     = var.yc_folder_id
     "controller.ycServiceAccount.workloadIdentityFederation.serviceAccountID" = yandex_iam_service_account.sa_gwin.id
     "controller.defaultBalancerSubnets" = yamlencode([
-      yandex_vpc_subnet.subnet_1.id,
       yandex_vpc_subnet.subnet_2.id,
+      yandex_vpc_subnet.subnet_3.id,
+      yandex_vpc_subnet.subnet_4.id
     ])
   }
 }
