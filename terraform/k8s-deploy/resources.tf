@@ -45,8 +45,7 @@ resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
     "compute.viewer",
     "k8s.viewer",
     "smart-web-security.editor",
-    "logging.writer",
-    "vpc.user"
+    "logging.writer"
   ])
   folder_id = var.yc_folder_id
   role      = each.key
