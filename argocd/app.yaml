@@ -22,12 +22,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-lb
   namespace: default
 spec:
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
     - name: http
       port: 80
       targetPort: 80
+
