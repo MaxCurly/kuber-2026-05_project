@@ -2,11 +2,21 @@ resource "helm_release" "argocd" {
   name             = "argocd"
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
-  version          = "6.6.0"
+  version          = "10.9.1" # Для этого чарта используется global.image
   namespace        = "argocd"
   create_namespace = true
   wait             = true
   timeout          = 600
+
+  values = [
+    yamlencode({
+      global = {
+        image = {
+          repository = "cr.yandex/cn1vj9hg7fv2jlquf8hj/argoproj/argocd"
+        }
+      }
+    })
+  ]
 }
 
 resource "kubectl_manifest" "root_app" {

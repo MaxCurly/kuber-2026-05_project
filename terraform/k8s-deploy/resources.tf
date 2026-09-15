@@ -17,13 +17,6 @@ resource "yandex_iam_service_account" "sa_node" {
   folder_id   = var.yc_folder_id
 }
 
-#resource "yandex_iam_service_account" "sa_gwin" {
-#  name        = var.yc_sa_gwin_name
-#  description = var.yc_sa_gwin_name
-#  folder_id   = var.yc_folder_id
-#}
-
-
 resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
   for_each = toset([
     "load-balancer.admin",
@@ -36,26 +29,11 @@ resource "yandex_resourcemanager_folder_iam_member" "sa_cluster_role" {
   member    = "serviceAccount:${yandex_iam_service_account.sa_cluster.id}"
 }
 
-#resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
-#  for_each = toset([
-#    "alb.editor",
-#    "vpc.publicAdmin",
-#    "certificate-manager.certificates.downloader",
-#    "certificate-manager.editor",
-#    "compute.viewer",
-#    "k8s.viewer",
-#    "smart-web-security.editor",
-#    "logging.writer"
-#  ])
-#  folder_id = var.yc_folder_id
-#  role      = each.key
-#  member    = "serviceAccount:${yandex_iam_service_account.sa_gwin.id}"
-#}
-
 resource "yandex_resourcemanager_folder_iam_member" "sa_node_role" {
   for_each = toset([
     "container-registry.images.pusher",
-    "container-registry.images.puller"
+    "container-registry.images.puller",
+    "cloud-registry.artifacts.puller"
   ])
   folder_id = var.yc_folder_id
   role      = each.key
@@ -232,6 +210,30 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
   }
 }
 
+#### YC-GWIN ####
+#
+#resource "yandex_iam_service_account" "sa_gwin" {
+#  name        = var.yc_sa_gwin_name
+#  description = var.yc_sa_gwin_name
+#  folder_id   = var.yc_folder_id
+#}
+#
+#resource "yandex_resourcemanager_folder_iam_member" "sa_gwin_role" {
+#  for_each = toset([
+#    "alb.editor",
+#    "vpc.publicAdmin",
+#    "certificate-manager.certificates.downloader",
+#    "certificate-manager.editor",
+#    "compute.viewer",
+#    "k8s.viewer",
+#    "smart-web-security.editor",
+#    "logging.writer"
+#  ])
+#  folder_id = var.yc_folder_id
+#  role      = each.key
+#  member    = "serviceAccount:${yandex_iam_service_account.sa_gwin.id}"
+#}
+#
 #resource "yandex_iam_workload_identity_oidc_federation" "wlif" {
 #  name      = "gwin-federation"
 #  folder_id = var.yc_folder_id
@@ -241,7 +243,7 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
 #
 #  depends_on = [yandex_kubernetes_cluster.k8s_cluster]
 #}
-
+#
 #resource "yandex_iam_workload_identity_federated_credential" "gwin_cred" {
 #  service_account_id  = yandex_iam_service_account.sa_gwin.id
 #  federation_id       = yandex_iam_workload_identity_oidc_federation.wlif.id
@@ -249,7 +251,7 @@ resource "yandex_kubernetes_node_group" "k8s_node_group_1" {
 #
 #  depends_on = [yandex_iam_workload_identity_oidc_federation.wlif]
 #}
-
+#
 #resource "yandex_kubernetes_marketplace_helm_release" "gwin_helm_release" {
 #  cluster_id      = yandex_kubernetes_cluster.k8s_cluster.id
 #  product_version = "f2es4v8v1cguell5ooll"
