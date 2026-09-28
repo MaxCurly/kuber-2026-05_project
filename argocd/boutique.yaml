@@ -11,10 +11,6 @@ spec:
     repoURL: 'https://github.com/GoogleCloudPlatform/microservices-demo.git'
     targetRevision: HEAD
     path: helm-chart
-    helm:
-      values: |
-        images:
-          repository: "mirror.gcr.io"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: online-boutique
