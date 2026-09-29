@@ -9,11 +9,6 @@ resource "helm_release" "argocd" {
   timeout          = 600
   values = [
     yamlencode({
-      global = {
-        image = {
-          repository = "quay.nju.edu.cn/argoproj/argocd"
-        }
-      }
       server = {
         service = {
           type = "LoadBalancer"
