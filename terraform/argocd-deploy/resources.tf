@@ -7,7 +7,17 @@ resource "helm_release" "argocd" {
   create_namespace = true
   wait             = true
   timeout          = 600
+  values = [
+    yamlencode({
+      global = {
+        image = {
+          repository = "quay.kubesre.xyz/argoproj/argocd"
+        }
+      }
+    })
+  ]
 }
+
 
 resource "kubectl_manifest" "root_app" {
   depends_on = [helm_release.argocd]
