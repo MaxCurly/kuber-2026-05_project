@@ -14,6 +14,11 @@ resource "helm_release" "argocd" {
           repository = "quay.nju.edu.cn/argoproj/argocd"
         }
       }
+      server = {
+        service = {
+          type = "LoadBalancer"
+        }
+      }
     })
   ]
 }
