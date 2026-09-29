@@ -11,7 +11,7 @@ resource "helm_release" "argocd" {
     yamlencode({
       global = {
         image = {
-          repository = "quay.kubesre.xyz/argoproj/argocd"
+          repository = "quay.nju.edu.cn/argoproj/argocd"
         }
       }
     })
