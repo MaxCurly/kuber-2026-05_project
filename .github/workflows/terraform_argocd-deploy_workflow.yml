@@ -1,6 +1,12 @@
 name: 'terraform_argocd-deploy_workflow'
 
 on:
+  workflow_run:
+    workflows: ["terraform_k8s-deploy_workflow"]
+    types:
+      - completed
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
