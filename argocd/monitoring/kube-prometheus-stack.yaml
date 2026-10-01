@@ -10,30 +10,33 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 91.7.0
-    helm:
-      skipCrds: true
-      values: |
-        crds:
-          enabled: false
-        grafana:
-          service:
-            type: LoadBalancer
-          persistence:
-            enabled: true
-            size: 10Gi
-          additionalDataSources:
-            - name: Loki
-              type: loki
-              uid: loki
-              url: http://loki-gateway.logging.svc.cluster.local
-              access: proxy
-        prometheus:
-          prometheusSpec:
-            serviceMonitorSelectorNilUsesHelmValues: false
-            podMonitorSelectorNilUsesHelmValues: false
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 91.7.0
+      helm:
+        skipCrds: true
+        values: |
+          crds:
+            enabled: false
+          grafana:
+            service:
+              type: LoadBalancer
+            persistence:
+              enabled: true
+              size: 10Gi
+            additionalDataSources:
+              - name: Loki
+                type: loki
+                uid: loki
+                url: http://loki-gateway.logging.svc.cluster.local
+                access: proxy
+          prometheus:
+            prometheusSpec:
+              serviceMonitorSelectorNilUsesHelmValues: false
+              podMonitorSelectorNilUsesHelmValues: false
+    - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
+      targetRevision: HEAD
+      path: grafana-dashboards/
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
