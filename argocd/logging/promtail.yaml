@@ -19,7 +19,7 @@ spec:
       values: |
         config:
           clients:
-            - url: http://loki-gateway.monitoring.svc.cluster.local/loki/api/v1/push
+            - url: http://loki-gateway.logging.svc.cluster.local/loki/api/v1/push
   destination:
     server: https://kubernetes.default.svc
     namespace: logging
