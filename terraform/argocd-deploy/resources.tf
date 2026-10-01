@@ -18,7 +18,6 @@ resource "helm_release" "argocd" {
   ]
 }
 
-
 resource "kubectl_manifest" "root_app" {
   depends_on = [helm_release.argocd]
 
@@ -26,7 +25,7 @@ resource "kubectl_manifest" "root_app" {
     apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
-      name: root-app
+      name: app-of-apps
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io

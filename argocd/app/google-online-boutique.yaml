@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: online-boutique
+  name: google-online-boutique
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -13,7 +15,7 @@ spec:
     path: helm-chart
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: online-boutique
+    namespace: google-online-boutique
   syncPolicy:
     automated:
       prune: true
