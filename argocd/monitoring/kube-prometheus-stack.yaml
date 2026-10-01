@@ -28,7 +28,7 @@ spec:
             - name: Loki
               type: loki
               uid: loki
-              url: http://loki-gateway.monitoring.svc.cluster.local
+              url: http://loki-gateway.logging.svc.cluster.local
               access: proxy
         prometheus:
           prometheusSpec:
