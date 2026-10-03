@@ -11,6 +11,7 @@ spec:
       app: online-boutique
   endpoints:
 
+    # --- Frontend (HTTP) ---
     - port: http
       path: /probe
       interval: 30s
@@ -19,14 +20,18 @@ spec:
         module: [http_2xx]
         target: [frontend.online-boutique.svc.cluster.local:80]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-frontend
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- ProductCatalogService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -35,14 +40,18 @@ spec:
         module: [grpc_healthcheck]
         target: [productcatalogservice.online-boutique.svc.cluster.local:3550]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-productcatalog
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- CartService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -51,14 +60,18 @@ spec:
         module: [grpc_healthcheck]
         target: [cartservice.online-boutique.svc.cluster.local:7070]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-cartservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- CurrencyService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -67,14 +80,18 @@ spec:
         module: [grpc_healthcheck]
         target: [currencyservice.online-boutique.svc.cluster.local:7000]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-currencyservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- PaymentService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -83,14 +100,18 @@ spec:
         module: [grpc_healthcheck]
         target: [paymentservice.online-boutique.svc.cluster.local:50051]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-paymentservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- ShippingService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -99,14 +120,18 @@ spec:
         module: [grpc_healthcheck]
         target: [shippingservice.online-boutique.svc.cluster.local:50051]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-shippingservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- EmailService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -115,14 +140,18 @@ spec:
         module: [grpc_healthcheck]
         target: [emailservice.online-boutique.svc.cluster.local:8080]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-emailservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- RecommendationService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -131,14 +160,18 @@ spec:
         module: [grpc_healthcheck]
         target: [recommendationservice.online-boutique.svc.cluster.local:8080]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-recommendationservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
 
+    # --- AdService (gRPC) ---
     - port: http
       path: /probe
       interval: 30s
@@ -147,10 +180,13 @@ spec:
         module: [grpc_healthcheck]
         target: [adservice.online-boutique.svc.cluster.local:9555]
       relabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: instance
-        - targetLabel: job
+        - action: replace
+          targetLabel: job
           replacement: online-boutique-adservice
       metricRelabelings:
-        - sourceLabels: [__param_target]
+        - action: replace
+          sourceLabels: [__param_target]
           targetLabel: target
