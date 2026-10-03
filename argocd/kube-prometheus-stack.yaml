@@ -35,28 +35,20 @@ spec:
               serviceMonitorSelectorNilUsesHelmValues: false
               podMonitorSelectorNilUsesHelmValues: false
           alertmanager:
-            config:
-              global:
-                resolve_timeout: 5m
-          
-              route:
-                group_by: ['alertname', 'namespace']
-                group_wait: 10s
-                group_interval: 5m
-                repeat_interval: 4h
-                receiver: 'webhook-notifications'
-          
-              receivers:
-                - name: 'webhook-notifications'
-                  webhook_configs:
-                    - url: 'https://webhooksite.net/a4968290-2cbf-4e99-991e-67591646dd09'
-                      send_resolved: true
+            alertmanagerSpec:
+              alertmanagerConfigSelector:
+                matchLabels:
+                  alertmanager: main
+              alertmanagerConfigNamespaceSelector: {}
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
       path: grafana-dashboards/
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
       path: prometheus-service-monitor/
+    - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
+      targetRevision: HEAD
+      path: prometheus-alertmanager-config/
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
