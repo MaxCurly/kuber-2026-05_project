@@ -15,5 +15,5 @@ spec:
   receivers:
     - name: 'webhook-notifications'
       webhookConfigs:
-        - url: 'https://webhook.site/ваш-уникальный-id'
+        - url: 'https://webhooksite.net/a4968290-2cbf-4e99-991e-67591646dd09'
           sendResolved: true
