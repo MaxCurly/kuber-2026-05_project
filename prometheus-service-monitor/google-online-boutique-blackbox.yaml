@@ -1,0 +1,156 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: google-online-boutique-blackbox
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: blackbox-exporter
+  endpoints:
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [http_2xx]
+        target: [frontend.online-boutique.svc.cluster.local:80]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-frontend
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [productcatalogservice.online-boutique.svc.cluster.local:3550]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-productcatalog
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [cartservice.online-boutique.svc.cluster.local:7070]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-cartservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [currencyservice.online-boutique.svc.cluster.local:7000]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-currencyservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [paymentservice.online-boutique.svc.cluster.local:50051]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-paymentservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [shippingservice.online-boutique.svc.cluster.local:50051]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-shippingservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [emailservice.online-boutique.svc.cluster.local:8080]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-emailservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [recommendationservice.online-boutique.svc.cluster.local:8080]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-recommendationservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
+
+    - port: http
+      path: /probe
+      interval: 30s
+      scrapeTimeout: 10s
+      params:
+        module: [grpc_healthcheck]
+        target: [adservice.online-boutique.svc.cluster.local:9555]
+      relabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: instance
+        - targetLabel: job
+          replacement: online-boutique-adservice
+      metricRelabelings:
+        - sourceLabels: [__param_target]
+          targetLabel: target
