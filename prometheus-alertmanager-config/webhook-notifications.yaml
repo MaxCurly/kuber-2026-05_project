@@ -15,5 +15,5 @@ spec:
   receivers:
     - name: 'webhook-notifications'
       webhookConfigs:
-        - url: 'http://webhook-tester.monitoring.svc.cluster.local:8800/11111111-2222-3333-4444-555555555555'
+        - url: 'http://webhook-tester.monitoring.svc.cluster.local:8080/11111111-2222-3333-4444-555555555555'
           sendResolved: true
