@@ -12,21 +12,21 @@ spec:
   source:
     repoURL: https://tarampampam.github.io/webhook-tester/helm-charts
     chart: webhook-tester
-    targetRevision: 2.2.3
+    targetRevision: 2.3.0
     helm:
       values: |
         service:
           port: 8800
-        resources:
-          requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
-            cpu: 200m
-            memory: 128Mi
-        extraEnv:
-          - name: AUTO_CREATE_SESSIONS
-            value: "true"
+        config:
+          autoCreateSessions: true
+        deployment:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring
