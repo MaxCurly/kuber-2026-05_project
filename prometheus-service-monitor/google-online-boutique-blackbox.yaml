@@ -138,7 +138,7 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [emailservice.google-online-boutique.svc.cluster.local:8080]
+        target: [emailservice.google-online-boutique.svc.cluster.local:5000]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
