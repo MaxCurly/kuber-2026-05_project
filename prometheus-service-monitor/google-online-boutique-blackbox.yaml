@@ -26,6 +26,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -42,6 +43,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -58,6 +60,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -74,6 +77,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -90,6 +94,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -106,6 +111,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -122,6 +128,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -138,6 +145,7 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
 
     - port: http
       path: /probe
@@ -154,3 +162,4 @@ spec:
       metricRelabelings:
         - sourceLabels: [__param_target]
           targetLabel: target
+          action: replace
