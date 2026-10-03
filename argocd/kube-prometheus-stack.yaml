@@ -34,6 +34,13 @@ spec:
             prometheusSpec:
               serviceMonitorSelectorNilUsesHelmValues: false
               podMonitorSelectorNilUsesHelmValues: false
+          alertmanager:
+            config:
+              receivers:
+                - name: 'webhook-test'
+                  webhook_configs:
+                    - url: 'https://webhook.site/a4968290-2cbf-4e99-991e-67591646dd09'
+                      send_resolved: true
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
       path: grafana-dashboards/
