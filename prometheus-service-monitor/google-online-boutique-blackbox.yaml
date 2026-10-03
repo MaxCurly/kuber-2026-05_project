@@ -6,9 +6,12 @@ metadata:
   labels:
     release: kube-prometheus-stack
 spec:
+  namespaceSelector:
+    matchNames:
+      - online-boutique
   selector:
     matchLabels:
-      app: online-boutique
+      app: frontend
   endpoints:
 
     # --- Frontend (HTTP) ---
