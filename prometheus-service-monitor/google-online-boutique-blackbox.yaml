@@ -18,14 +18,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [http_2xx]
-        target: [frontend.online-boutique.svc.cluster.local:80]
+        target: [frontend.google-online-boutique.svc.cluster.local:80]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-frontend
+          replacement: google-online-boutique-frontend
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -38,14 +38,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [productcatalogservice.online-boutique.svc.cluster.local:3550]
+        target: [productcatalogservice.google-online-boutique.svc.cluster.local:3550]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-productcatalog
+          replacement: google-online-boutique-productcatalog
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -58,14 +58,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [cartservice.online-boutique.svc.cluster.local:7070]
+        target: [cartservice.google-online-boutique.svc.cluster.local:7070]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-cartservice
+          replacement: google-online-boutique-cartservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -78,14 +78,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [currencyservice.online-boutique.svc.cluster.local:7000]
+        target: [currencyservice.google-online-boutique.svc.cluster.local:7000]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-currencyservice
+          replacement: google-online-boutique-currencyservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -98,14 +98,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [paymentservice.online-boutique.svc.cluster.local:50051]
+        target: [paymentservice.google-online-boutique.svc.cluster.local:50051]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-paymentservice
+          replacement: google-online-boutique-paymentservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -118,14 +118,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [shippingservice.online-boutique.svc.cluster.local:50051]
+        target: [shippingservice.google-online-boutique.svc.cluster.local:50051]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-shippingservice
+          replacement: google-online-boutique-shippingservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -138,14 +138,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [emailservice.online-boutique.svc.cluster.local:8080]
+        target: [emailservice.google-online-boutique.svc.cluster.local:8080]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-emailservice
+          replacement: google-online-boutique-emailservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -158,14 +158,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [recommendationservice.online-boutique.svc.cluster.local:8080]
+        target: [recommendationservice.google-online-boutique.svc.cluster.local:8080]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-recommendationservice
+          replacement: google-online-boutique-recommendationservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
@@ -178,14 +178,14 @@ spec:
       scrapeTimeout: 10s
       params:
         module: [grpc_healthcheck]
-        target: [adservice.online-boutique.svc.cluster.local:9555]
+        target: [adservice.google-online-boutique.svc.cluster.local:9555]
       relabelings:
         - action: replace
           sourceLabels: [__param_target]
           targetLabel: instance
         - action: replace
           targetLabel: job
-          replacement: online-boutique-adservice
+          replacement: google-online-boutique-adservice
       metricRelabelings:
         - action: replace
           sourceLabels: [__param_target]
