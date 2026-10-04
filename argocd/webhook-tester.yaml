@@ -16,6 +16,7 @@ spec:
     helm:
       values: |
         service:
+          type: LoadBalancer
           port: 8800
         config:
           autoCreateSessions: true
