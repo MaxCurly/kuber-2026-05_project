@@ -78,7 +78,7 @@ spec:
       path: prometheus-service-monitor/
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
-      path: prometheus-alertmanager-config/
+      path: prometheus-alertmanager-alert/
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
