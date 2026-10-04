@@ -49,6 +49,8 @@ spec:
                 matchLabels:
                   alertmanager: main
               alertmanagerConfigNamespaceSelector: {}
+              alertmanagerConfigMatcherStrategy:
+                type: None
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
       path: grafana-dashboards/
