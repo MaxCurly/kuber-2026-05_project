@@ -51,6 +51,25 @@ spec:
               alertmanagerConfigNamespaceSelector: {}
               alertmanagerConfigMatcherStrategy:
                 type: None
+            config:
+              global:
+                resolve_timeout: 5m
+              route:
+                group_by: ['alertname', 'namespace']
+                group_wait: 10s
+                group_interval: 1m
+                repeat_interval: 1m
+                receiver: 'webhook-notifications'
+                routes:
+                  - receiver: 'null'
+                    matchers:
+                      - alertname="Watchdog"
+              receivers:
+                - name: 'null'
+                - name: 'webhook-notifications'
+                  webhook_configs:
+                    - url: 'http://webhook-tester.monitoring.svc.cluster.local:8080/11111111-2222-3333-4444-555555555555'
+                      send_resolved: true
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
       path: grafana-dashboards/
