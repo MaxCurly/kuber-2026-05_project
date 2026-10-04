@@ -68,7 +68,7 @@ spec:
                 - name: 'null'
                 - name: 'webhook-notifications'
                   webhook_configs:
-                    - url: 'http://webhook-tester.monitoring.svc.cluster.local:8080/11111111-2222-3333-4444-555555555555'
+                    - url: 'http://webhook-tester.monitoring.svc.cluster.local:8800/11111111-2222-3333-4444-555555555555'
                       send_resolved: true
     - repoURL: https://github.com/MaxCurly/kuber-2026-05_project.git
       targetRevision: HEAD
