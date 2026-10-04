@@ -10,8 +10,8 @@ spec:
     receiver: 'webhook-notifications'
     groupBy: ['alertname', 'namespace']
     groupWait: 10s
-    groupInterval: 5m
-    repeatInterval: 4h
+    groupInterval: 1m
+    repeatInterval: 1m
   receivers:
     - name: 'webhook-notifications'
       webhookConfigs:
